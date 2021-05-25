@@ -16,6 +16,8 @@ library(alphavantager)
 
 # set defaults ------------------------------------------------------------
 
+config <- config::get(value = "alphavantage")
+
 setDTthreads(0L)
 theme_set(
   theme_bw()
@@ -23,7 +25,6 @@ theme_set(
 
 options(digits = 10)
 
-config <- config::get(value = "alphavantage")
 
 av_api_key(config$api_key)
 
