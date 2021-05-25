@@ -13,10 +13,25 @@ library(fpp3)
 library(tsbox)
 library(mlr3verse)
 library(alphavantager)
+library(smartapi)
 
 # set defaults ------------------------------------------------------------
 
-config <- config::get(value = "alphavantage")
+av_key <- config::get(value = "alphavantage")
+
+
+ab_key <- config::get(value = "angelbroking")
+
+ab_obj <- create_connection_object(ab_key)
+
+ab_data <- get_candle_data(
+  object = ab_obj,
+  exchange = "NSE",
+  symboltoken = 3045,
+  interval = "ONE_MINUTE",
+  fromdate = "2021-02-10 09:15",
+  todate = "2021-02-10 11:15"
+)
 
 setDTthreads(0L)
 theme_set(
@@ -25,8 +40,7 @@ theme_set(
 
 options(digits = 10)
 
-
-av_api_key(config$api_key)
+av_api_key(av_key$api_key)
 
 Sys.setenv("_R_USE_PIPEBIND_" = "true")
 
