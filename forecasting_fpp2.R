@@ -72,10 +72,9 @@ methods(generic.function = "autoplot")
 autoplot.zoo(airp_xts)
 autoplot.zoo(unemp_xts)
 
-autoplot(
-  ts_xts(melsyd) |> 
-      ts_ts()
-  ) +
+ts_xts(melsyd) |> 
+  ts_ts() |> 
+  autoplot() +
   ggtitle("Economy class passengers: Melbourne-Sydney") +
   xlab("Year") +
   ylab("Thousands")
