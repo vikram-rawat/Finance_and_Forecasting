@@ -27,8 +27,6 @@ config <- config::get(value = "alphavantage")
 
 av_api_key(config$api_key)
 
-Sys.setenv("_R_USE_PIPEBIND_" = "true")
-
 # get data ----------------------------------------------------------------
 
 data("AirPassengers")
@@ -74,9 +72,10 @@ methods(generic.function = "autoplot")
 autoplot.zoo(airp_xts)
 autoplot.zoo(unemp_xts)
 
-ts_xts(melsyd) |> 
-  ts_ts() |>
-  x => autoplot(x) +
+autoplot(
+  ts_xts(melsyd) |> 
+      ts_ts()
+  ) +
   ggtitle("Economy class passengers: Melbourne-Sydney") +
   xlab("Year") +
   ylab("Thousands")
