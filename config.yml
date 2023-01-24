@@ -1,0 +1,7 @@
+default:
+  alphavantage:
+    api_key: !expr Sys.getenv("alpha_vantage_key")
+
+production:
+  alphavantage:
+    api_key: !expr Sys.getenv("alpha_vantage_key")

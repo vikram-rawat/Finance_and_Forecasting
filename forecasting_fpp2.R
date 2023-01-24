@@ -38,21 +38,9 @@ eur_usd <- av_get(
   av_fun = "FX_DAILY",
   time_period = 40,
   outputsize = "full"
-) |>
+) |> 
   as.data.table() |>
   as.xts(order.by = timestamp)
-
-
-eur_usd_today <- av_get(
-  symbol = "EUR/USD",
-  av_fun = "FX_INTRADAY",
-  interval = "5min",
-  time_period = 40,
-  outputsize = "full"
-  ) |>
-  as.data.table() |>
-  as.xts(order.by = timestamp)
-
 
 airp_xts <- as.xts(AirPassengers)
 unemp_xts <- as.xts(unemployment)
