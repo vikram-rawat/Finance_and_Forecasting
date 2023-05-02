@@ -432,18 +432,18 @@
     },
     "cachem": {
       "Package": "cachem",
-      "Version": "1.0.7",
+      "Version": "1.0.8",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "fastmap",
         "rlang"
       ],
-      "Hash": "cda74447c42f529de601fe4d4050daef"
+      "Hash": "c35768291560ce302c0a6589f92e837d"
     },
     "checkmate": {
       "Package": "checkmate",
-      "Version": "2.1.0",
+      "Version": "2.2.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -451,7 +451,7 @@
         "backports",
         "utils"
       ],
-      "Hash": "147e4db6909d8814bb30f671b49d7e06"
+      "Hash": "ca9c113196136f4a9ca9ce6079c2c99e"
     },
     "class": {
       "Package": "class",
@@ -618,19 +618,14 @@
     },
     "data.table": {
       "Package": "data.table",
-      "Version": "1.14.9",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteUsername": "Rdatatable",
-      "RemoteRepo": "data.table",
-      "RemoteRef": "master",
-      "RemoteSha": "88039186915028ab3c93ccfd8e22c0d1c3534b1a",
-      "RemoteHost": "api.github.com",
+      "Version": "1.14.8",
+      "Source": "Repository",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "methods"
       ],
-      "Hash": "09540652aad2b610e79814b7512d26f1"
+      "Hash": "b4c06e554f33344e044ccd7fdca750a9"
     },
     "diagram": {
       "Package": "diagram",
@@ -1035,14 +1030,14 @@
     },
     "fs": {
       "Package": "fs",
-      "Version": "1.6.1",
+      "Version": "1.6.2",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "methods"
       ],
-      "Hash": "f4dcd23b67e33d851d2079f703e8b985"
+      "Hash": "94af08e0aa9675a16fadbb3aaaa90d2a"
     },
     "furrr": {
       "Package": "furrr",
@@ -1729,6 +1724,25 @@
       ],
       "Hash": "8b71930f216fa191473895ce05965c00"
     },
+    "mlr3mbo": {
+      "Package": "mlr3mbo",
+      "Version": "0.1.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "R6",
+        "bbotk",
+        "checkmate",
+        "data.table",
+        "lgr",
+        "mlr3",
+        "mlr3misc",
+        "mlr3tuning",
+        "paradox"
+      ],
+      "Hash": "b855278330f6f6615b5e8ee79765f4cc"
+    },
     "mlr3measures": {
       "Package": "mlr3measures",
       "Version": "0.5.0",
@@ -1814,7 +1828,7 @@
     },
     "mlr3verse": {
       "Package": "mlr3verse",
-      "Version": "0.2.7",
+      "Version": "0.2.8",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -1828,6 +1842,7 @@
         "mlr3fselect",
         "mlr3hyperband",
         "mlr3learners",
+        "mlr3mbo",
         "mlr3misc",
         "mlr3pipelines",
         "mlr3tuning",
@@ -1835,7 +1850,7 @@
         "mlr3viz",
         "paradox"
       ],
-      "Hash": "14ad41474613a5b7e0963bc6999cb399"
+      "Hash": "cfdc43bda73f4c37edfe35e839c59a73"
     },
     "mlr3viz": {
       "Package": "mlr3viz",
@@ -2236,7 +2251,7 @@
     },
     "recipes": {
       "Package": "recipes",
-      "Version": "1.0.5",
+      "Version": "1.0.6",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -2265,7 +2280,7 @@
         "vctrs",
         "withr"
       ],
-      "Hash": "a3ad6802b18da51f9d38ac7ae8949166"
+      "Hash": "eb53ffc9674dc9a52c3a7e22d96d3f56"
     },
     "renv": {
       "Package": "renv",
@@ -2300,14 +2315,14 @@
     },
     "rlang": {
       "Package": "rlang",
-      "Version": "1.1.0",
+      "Version": "1.1.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "utils"
       ],
-      "Hash": "dc079ccd156cde8647360f473c1fa718"
+      "Hash": "a85c767b55f0bf9b7ad16c6d7baee5bb"
     },
     "rmarkdown": {
       "Package": "rmarkdown",
@@ -2733,19 +2748,20 @@
     },
     "tseries": {
       "Package": "tseries",
-      "Version": "0.10-53",
+      "Version": "0.10-54",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "graphics",
+        "jsonlite",
         "quadprog",
         "quantmod",
         "stats",
         "utils",
         "zoo"
       ],
-      "Hash": "d8bb01a005618181abacea0bd89d63df"
+      "Hash": "a2045b968f6360df39d3267cf0f9d230"
     },
     "tsfeatures": {
       "Package": "tsfeatures",
@@ -2887,7 +2903,7 @@
     },
     "vroom": {
       "Package": "vroom",
-      "Version": "1.6.1",
+      "Version": "1.6.3",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -2909,7 +2925,7 @@
         "vctrs",
         "withr"
       ],
-      "Hash": "7015a74373b83ffaef64023f4a0f5033"
+      "Hash": "8318e64ffb3a70e652494017ec455561"
     },
     "warp": {
       "Package": "warp",
