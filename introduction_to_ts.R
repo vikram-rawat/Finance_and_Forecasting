@@ -1,6 +1,5 @@
 # load library ------------------------------------------------------------
 
-library(magrittr)
 library(data.table)
 library(timeSeries)
 library(xts)

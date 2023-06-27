@@ -143,14 +143,11 @@ eur_usd |>
   chartSeries()
 
 addSMA(n = 20) 
-addBBands()
-addRSI(n=14,maType="EMA")
-addMACD(fast=12,slow=26,signal=9,type="EMA")
+addBBands() #"Bollinger Bands"
+addRSI(n=14,maType="EMA") #"Relative strength Index"
+addMACD(fast=12,slow=26,signal=9,type="EMA") #"Moving average convergence divergence"
 zoomChart(
   subset = "2021-05/",
   yrange = c(1.19,1.23)
 )
 
-"Moving average convergence divergence"
-"Relative strength Index"
-"Bollinger Bands"

@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.3.0",
+    "Version": "4.3.1",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -30,13 +30,13 @@
     },
     "DEoptimR": {
       "Package": "DEoptimR",
-      "Version": "1.0-13",
+      "Version": "1.0-14",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "stats"
       ],
-      "Hash": "8f5c81679eea074e7152f16b78d7de81"
+      "Hash": "3c6cc7c182d60d2802b5e88235c3a054"
     },
     "FinancialInstrument": {
       "Package": "FinancialInstrument",
@@ -193,7 +193,7 @@
     },
     "RcppArmadillo": {
       "Package": "RcppArmadillo",
-      "Version": "0.12.4.0.0",
+      "Version": "0.12.4.1.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -203,7 +203,7 @@
         "stats",
         "utils"
       ],
-      "Hash": "5402c9d935b45fe528538703b5edf680"
+      "Hash": "44b6ca3a6d22b4c87cdd6140e6f15245"
     },
     "RcppParallel": {
       "Package": "RcppParallel",
@@ -412,7 +412,7 @@
     },
     "bslib": {
       "Package": "bslib",
-      "Version": "0.4.2",
+      "Version": "0.5.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -428,7 +428,7 @@
         "rlang",
         "sass"
       ],
-      "Hash": "a7fbf03946ad741129dc81098722fca1"
+      "Hash": "1b117970533deb6d4e992c1b34e9d905"
     },
     "cachem": {
       "Package": "cachem",
@@ -610,13 +610,13 @@
     },
     "curl": {
       "Package": "curl",
-      "Version": "5.0.0",
+      "Version": "5.0.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R"
       ],
-      "Hash": "e4f97056611e8e6b8b852d13b7400cf1"
+      "Hash": "2118af9cb164c8d2dddc7b89eaf732d9"
     },
     "data.table": {
       "Package": "data.table",
@@ -644,14 +644,14 @@
     },
     "digest": {
       "Package": "digest",
-      "Version": "0.6.31",
+      "Version": "0.6.32",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "utils"
       ],
-      "Hash": "8b708f296afd9ae69f450f9640be8990"
+      "Hash": "011ce1464a4716c488f4fc649c3d4d50"
     },
     "diptest": {
       "Package": "diptest",
@@ -1356,13 +1356,13 @@
     },
     "jsonlite": {
       "Package": "jsonlite",
-      "Version": "1.8.4",
+      "Version": "1.8.5",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "methods"
       ],
-      "Hash": "a4269a09a9b865579b2635c77e572374"
+      "Hash": "3ee4d9899e4db3e976fc82b98d24a31a"
     },
     "kernlab": {
       "Package": "kernlab",
@@ -1602,7 +1602,7 @@
     },
     "mlr3": {
       "Package": "mlr3",
-      "Version": "0.16.0",
+      "Version": "0.16.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -1623,7 +1623,7 @@
         "parallelly",
         "uuid"
       ],
-      "Hash": "428b8ba91da4a6cd99a2587fa5876c66"
+      "Hash": "adc6c5e420f3dd5dcdc079033ba065f9"
     },
     "mlr3cluster": {
       "Package": "mlr3cluster",
@@ -1728,7 +1728,7 @@
     },
     "mlr3mbo": {
       "Package": "mlr3mbo",
-      "Version": "0.1.2",
+      "Version": "0.2.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -1741,9 +1741,10 @@
         "mlr3",
         "mlr3misc",
         "mlr3tuning",
-        "paradox"
+        "paradox",
+        "spacefillr"
       ],
-      "Hash": "b855278330f6f6615b5e8ee79765f4cc"
+      "Hash": "c513f2b72149088e826c610442cf3d8d"
     },
     "mlr3measures": {
       "Package": "mlr3measures",
@@ -1795,7 +1796,7 @@
     },
     "mlr3tuning": {
       "Package": "mlr3tuning",
-      "Version": "0.18.0",
+      "Version": "0.19.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -1809,7 +1810,7 @@
         "mlr3misc",
         "paradox"
       ],
-      "Hash": "78d487d9851cf5904f3491b21a162c41"
+      "Hash": "0654f180a077d9fb660c5515e5b82258"
     },
     "mlr3tuningspaces": {
       "Package": "mlr3tuningspaces",
@@ -2020,7 +2021,7 @@
     },
     "plotly": {
       "Package": "plotly",
-      "Version": "4.10.1",
+      "Version": "4.10.2",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -2048,7 +2049,7 @@
         "vctrs",
         "viridisLite"
       ],
-      "Hash": "3781cf6971c6467fa842a63725bbee9e"
+      "Hash": "6c00a09ba7d34917d9a3e28b15dd74e3"
     },
     "plyr": {
       "Package": "plyr",
@@ -2178,7 +2179,7 @@
     },
     "quantmod": {
       "Package": "quantmod",
-      "Version": "0.4.22",
+      "Version": "0.4.23",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -2190,7 +2191,7 @@
         "xts",
         "zoo"
       ],
-      "Hash": "cc504f910a540b431e31ed317fd364d2"
+      "Hash": "4e22df5a2501e5f538a380c14ea852a4"
     },
     "quantstrat": {
       "Package": "quantstrat",
@@ -2328,7 +2329,7 @@
     },
     "rmarkdown": {
       "Package": "rmarkdown",
-      "Version": "2.21",
+      "Version": "2.22",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -2348,11 +2349,11 @@
         "xfun",
         "yaml"
       ],
-      "Hash": "493df4ae51e2e984952ea4d5c75786a3"
+      "Hash": "75a01be060d800ceb14e32c666cacac9"
     },
     "robustbase": {
       "Package": "robustbase",
-      "Version": "0.95-1",
+      "Version": "0.99-0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -2363,7 +2364,7 @@
         "stats",
         "utils"
       ],
-      "Hash": "50e6b6ad7801416766716d9fa853e23d"
+      "Hash": "2af254ab59081fbde822b89d4110f24c"
     },
     "roll": {
       "Package": "roll",
@@ -2525,6 +2526,16 @@
         "xts"
       ],
       "Hash": "e8a955dbefd61a9a323844fdac474340"
+    },
+    "spacefillr": {
+      "Package": "spacefillr",
+      "Version": "0.3.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "Rcpp"
+      ],
+      "Hash": "30850588bdc225885f2417fb1e7c8ee3"
     },
     "stringi": {
       "Package": "stringi",
@@ -2867,7 +2878,7 @@
     },
     "vctrs": {
       "Package": "vctrs",
-      "Version": "0.6.2",
+      "Version": "0.6.3",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -2877,7 +2888,7 @@
         "lifecycle",
         "rlang"
       ],
-      "Hash": "a745bda7aff4734c17294bb41d4e4607"
+      "Hash": "d0ef2856b83dc33ea6e255caf6229ee2"
     },
     "viridis": {
       "Package": "viridis",
