@@ -15,13 +15,10 @@ library("fabletools")
 library("feasts")
 library("fable.prophet")
 library("fasttime")
-
 # set defaults ------------------------------------------------------------
 
 data(a10)
-
 setDTthreads(0L)
-
 theme_set(
   theme_bw()
 )
