@@ -1177,6 +1177,16 @@
       ],
       "Hash": "d15631c019c27e50b1a99e3e9b3b53e1"
     },
+    "filelock": {
+      "Package": "filelock",
+      "Version": "1.0.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "192053c276525c8495ccfd523aa8f2d1"
+    },
     "flexmix": {
       "Package": "flexmix",
       "Version": "2.3-19",
@@ -1721,6 +1731,24 @@
         "vctrs"
       ],
       "Hash": "9171f898db9d9c4c1b2c745adc2c1ef1"
+    },
+    "hfhub": {
+      "Package": "hfhub",
+      "Version": "0.1.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "cli",
+        "curl",
+        "filelock",
+        "fs",
+        "glue",
+        "httr",
+        "rlang",
+        "urltools",
+        "withr"
+      ],
+      "Hash": "efb5d90e01304347b9d7aa9d0ff6017e"
     },
     "highr": {
       "Package": "highr",
@@ -3783,6 +3811,18 @@
       ],
       "Hash": "0defd55e9d1ae61c4aef6d6e9c9a5dfb"
     },
+    "tok": {
+      "Package": "tok",
+      "Version": "0.1.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "R6",
+        "cli"
+      ],
+      "Hash": "e3cdbac3e4526293642e7d9feac0f2b2"
+    },
     "topicmodels.etm": {
       "Package": "topicmodels.etm",
       "Version": "0.1.1",
@@ -3864,6 +3904,16 @@
         "withr"
       ],
       "Hash": "60d1b908d5471695f25bb7b997370955"
+    },
+    "triebeard": {
+      "Package": "triebeard",
+      "Version": "0.4.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "Rcpp"
+      ],
+      "Hash": "642507a148b0dd9b5620177e0a044413"
     },
     "tsbox": {
       "Package": "tsbox",
@@ -3973,6 +4023,19 @@
         "stats"
       ],
       "Hash": "efec213571f99114c63562e4c076ac25"
+    },
+    "urltools": {
+      "Package": "urltools",
+      "Version": "1.7.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "Rcpp",
+        "methods",
+        "triebeard"
+      ],
+      "Hash": "e86a704261a105f4703f653e05defa3e"
     },
     "utf8": {
       "Package": "utf8",
