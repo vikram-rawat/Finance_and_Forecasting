@@ -8,6 +8,3 @@ library(innsight)
 library(luz)
 
 # section: ----------------------------------
-
-renv::update()
-Y
