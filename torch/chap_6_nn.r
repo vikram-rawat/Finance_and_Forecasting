@@ -126,3 +126,44 @@ for (t in 1:1e3) {
     b2$grad$zero_()
   })
 }
+
+# dummy: ----------------------------------
+
+# # Create some example data
+# x <- torch_tensor(1:100)
+# y <- 10 * x + 2
+
+# # Initialize weights
+# weights <- torch_randn(2, requires_grad = TRUE)
+
+# # Define the model
+# model <- function(x, weights) {
+#   weights[1] * x + weights[2]
+# }
+
+# # Define the loss function (Mean Squared Error)
+# loss_fn <- nnf_mse_loss
+
+# # Define the optimizer (Stochastic Gradient Descent)
+# optimizer <- optim_sgd(weights, lr = 0.001)
+
+# # Training loop
+# for (i in 1:1000) {
+#   # Forward pass: compute predicted y using operations on Tensors
+#   y_pred <- model(x, weights)
+
+#   # Compute and print loss
+#   loss <- loss_fn(y_pred, y)
+#   if (i %% 100 == 0) cat("Iteration", i, "Loss", loss$item(), "\n")
+
+#   # Zero gradients before running the backward pass
+#   optimizer$zero_grad()
+
+#   # Backward pass: compute gradient of the loss with respect to all the learnable parameters
+#   loss$backward()
+
+#   # Update the weights using gradient descent
+#   optimizer$step()
+# }
+
+# cat("Trained weights: ", as_array(weights), "\n")
