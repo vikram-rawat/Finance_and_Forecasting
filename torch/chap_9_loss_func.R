@@ -16,4 +16,4 @@ library(hfhub)
 
 layer <- nn_linear(10, 2)
 
-opt <- optim_sgd(layer$parameters, lr = 1e-1)
+# loss <- (y_pred - y)$pow(2)$sum()
