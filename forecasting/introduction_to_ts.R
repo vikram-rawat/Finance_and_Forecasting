@@ -38,8 +38,8 @@ xts::last(
   n =  "1 years"
 )
 
-airp_xts %>% 
-  convertIndex('POSIXct') %>% 
+airp_xts |> 
+  convertIndex('POSIXct') |> 
   tclass()
 
 methods(class = "xts")
@@ -62,10 +62,10 @@ period.sum(
     x = airp_xts,
     on = "year"
   )
-) %>% plot
+) |> plot
 
-airp_xts %>% 
-  as.data.table %>% 
+airp_xts |> 
+  as.data.table |> 
   ggplot(
     aes(index, V1)
     ) +
@@ -89,12 +89,12 @@ plot(unemp_xts)
 aggregate(
   head(unemp_xts),
   by = as.yearqtr,
-  FUN = sum) %>% 
+  FUN = sum) |> 
   plot()
 head(unemp_xts)
 
 window(unemp_xts[,"UN"], freq = TRUE)
 window(unemployment, freq = TRUE)
 
-(unemp_xts[,"UN"] / lag(unemp_xts[,"UN"], 4)) %>% 
+(unemp_xts[,"UN"] / lag(unemp_xts[,"UN"], 4)) |> 
   plot()

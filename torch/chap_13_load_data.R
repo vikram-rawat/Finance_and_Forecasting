@@ -23,7 +23,7 @@ penguins_dataset <- dataset(
   name = "penguins_dataset()",
   initialize = function(df) {
     df <- na.omit(df)
-    self$x <- as.matrix(df[, 3:6]) %>% torch_tensor()
+    self$x <- as.matrix(df[, 3:6]) |> torch_tensor()
     self$y <- torch_tensor(
       as.numeric(df$species)
     )$to(torch_long())
