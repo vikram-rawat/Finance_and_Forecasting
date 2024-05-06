@@ -12,6 +12,7 @@ library(innsight)
 library(luz)
 library(tok)
 library(hfhub)
+library(raster)
 
 # start: ----------------------------------
 
@@ -192,8 +193,8 @@ pet_dataset <- torch::dataset(
     self$augmentation <- augmentation
     input_transform <- function(x) {
       x <- x %>%
-        transform_to_tensor() %>%
-        transform_resize(size)
+        torchvision::transform_to_tensor() %>%
+        torchvision::transform_resize(size)
       if (normalize) {
         x <- x %>%
           transform_normalize(
@@ -242,8 +243,112 @@ augmentation <- function(item) {
 }
 
 
-angle <- runif(1, -12, 12)
-x <- transform_rotate(x, angle)
+# angle <- runif(1, -12, 12)
+# x <- transform_rotate(x, angle)
 
-# same effect as interpolation = 0, above
-y <- transform_rotate(y, angle, resample = 0)
+# # same effect as interpolation = 0, above
+# y <- transform_rotate(y, angle, resample = 0)
+
+train_ds <- pet_dataset(
+  root = dir,
+  split = "train",
+  size = c(224, 224),
+  augmentation = augmentation
+)
+
+valid_ds <- pet_dataset(
+  root = dir,
+  split = "valid",
+  size = c(224, 224)
+)
+
+
+train_dl <- dataloader(
+  train_ds,
+  batch_size = 32,
+  shuffle = TRUE
+)
+
+valid_dl <- dataloader(
+  valid_ds,
+  batch_size = 32
+)
+
+model <- model |>
+  setup(
+    optimizer = optim_adam,
+    loss = nn_cross_entropy_loss()
+  )
+
+rates_and_losses <- model |>
+  lr_finder(train_dl)
+
+rates_and_losses |>
+  plot()
+
+fitted <- model |>
+  fit(
+    train_dl,
+    epochs = 20,
+    valid_data = valid_dl,
+    callbacks = list(
+      luz_callback_early_stopping(patience = 2),
+      luz_callback_lr_scheduler(
+        lr_one_cycle,
+        max_lr = 0.01,
+        epochs = 20,
+        steps_per_epoch = length(train_dl),
+        call_on = "on_batch_end"
+      )
+    ),
+    verbose = TRUE
+  )
+
+# prediction: ----------------------------------
+valid_ds_4plot <- pet_dataset(
+  root = dir,
+  split = "valid",
+  size = c(224, 224),
+  normalize = FALSE
+)
+
+indices <- 1:8
+
+preds <- predict(
+  fitted,
+  dataloader(dataset_subset(valid_ds, indices))
+)
+
+png(
+  "pet_segmentation.png",
+  width = 1200,
+  height = 600,
+  bg = "black"
+)
+
+par(mfcol = c(2, 4), mar = rep(2, 4))
+
+for (i in indices) {
+  mask <- as.array(
+    torch_argmax(preds[i, ..], 1)$to(device = "cpu")
+  )
+  mask <- raster::ratify(raster::raster(mask))
+
+  img <- as.array(valid_ds_4plot[i][[1]]$permute(c(2, 3, 1)))
+  cond <- img > 0.99999
+  img[cond] <- 0.99999
+  img <- raster::brick(img)
+
+  # plot image
+  raster::plotRGB(img, scale = 1, asp = 1, margins = TRUE)
+  # overlay mask
+  plot(
+    mask,
+    alpha = 0.4,
+    legend = FALSE,
+    axes = FALSE,
+    add = TRUE
+  )
+}
+
+dev.off()
