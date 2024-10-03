@@ -9,6 +9,9 @@ local({
   project <- Sys.getenv("RENV_PROJECT")
   if (!nzchar(project))
     project <- getwd()
+  project <- Sys.getenv("RENV_PROJECT")
+  if (!nzchar(project))
+    project <- getwd()
 
   # use start-up diagnostics if enabled
   diagnostics <- Sys.getenv("RENV_STARTUP_DIAGNOSTICS", unset = "FALSE")
@@ -738,6 +741,9 @@ local({
     if (is.na(auto) && getRversion() >= "4.4.0")
       auto <- "TRUE"
   
+    if (is.na(auto) && getRversion() >= "4.4.0")
+      auto <- "TRUE"
+  
     if (auto %in% c("TRUE", "True", "true", "1"))
       return(renv_bootstrap_platform_prefix_auto())
   
@@ -931,7 +937,10 @@ local({
     # give the user instructions on how to proceed
     dev <- identical(description[["RemoteType"]], "github")
     remote <- if (dev)
+    dev <- identical(description[["RemoteType"]], "github")
+    remote <- if (dev)
       paste("rstudio/renv", description[["RemoteSha"]], sep = "@")
+    else
     else
       paste("renv", description[["Version"]], sep = "@")
   
@@ -939,8 +948,14 @@ local({
     friendly <- renv_bootstrap_version_friendly(
       version = description[["Version"]],
       sha     = if (dev) description[["RemoteSha"]]
+      sha     = if (dev) description[["RemoteSha"]]
     )
   
+    fmt <- heredoc("
+      renv %1$s was loaded from project library, but this project is configured to use renv %2$s.
+      - Use `renv::record(\"%3$s\")` to record renv %1$s in the lockfile.
+      - Use `renv::restore(packages = \"renv\")` to install renv %2$s into the project library.
+    ")
     fmt <- heredoc("
       renv %1$s was loaded from project library, but this project is configured to use renv %2$s.
       - Use `renv::record(\"%3$s\")` to record renv %1$s in the lockfile.
