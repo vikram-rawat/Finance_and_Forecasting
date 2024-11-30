@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.4.1",
+    "Version": "4.4.2",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -41,13 +41,13 @@
     },
     "DEoptimR": {
       "Package": "DEoptimR",
-      "Version": "1.1-3",
+      "Version": "1.1-3-1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "stats"
       ],
-      "Hash": "72f87e0092e39384aee16df8d67d7410"
+      "Hash": "53a0299b56b4cbe418b12e3b65587211"
     },
     "FinancialInstrument": {
       "Package": "FinancialInstrument",
@@ -430,7 +430,7 @@
     },
     "bbotk": {
       "Package": "bbotk",
-      "Version": "1.3.0",
+      "Version": "1.4.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -443,7 +443,7 @@
         "mlr3misc",
         "paradox"
       ],
-      "Hash": "e71a7499abeca05c23af255552764b77"
+      "Hash": "7f8c7901fa00e3d8ab7c79e83b72c277"
     },
     "bit": {
       "Package": "bit",
@@ -700,14 +700,14 @@
     },
     "collapse": {
       "Package": "collapse",
-      "Version": "2.0.17",
+      "Version": "2.0.18",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "Rcpp"
       ],
-      "Hash": "44c724af45009b8e8f60a95eabda4325"
+      "Hash": "1c8dff92ef021ec9e59930041f967758"
     },
     "colorspace": {
       "Package": "colorspace",
@@ -1756,7 +1756,7 @@
     },
     "httr2": {
       "Package": "httr2",
-      "Version": "1.0.6",
+      "Version": "1.0.7",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -1773,7 +1773,7 @@
         "vctrs",
         "withr"
       ],
-      "Hash": "3ef5d07ec78803475a94367d71b40c41"
+      "Hash": "5a76da345ed4f3e6430517e08441edaf"
     },
     "ids": {
       "Package": "ids",
@@ -1798,7 +1798,7 @@
     },
     "innsight": {
       "Package": "innsight",
-      "Version": "0.3.0",
+      "Version": "0.3.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -1810,7 +1810,7 @@
         "methods",
         "torch"
       ],
-      "Hash": "5ec068b2d0c17299623e1cec6f7c6297"
+      "Hash": "8c7018d3d9fd28e401131a4c3e63be7c"
     },
     "ipred": {
       "Package": "ipred",
@@ -1944,14 +1944,14 @@
     },
     "later": {
       "Package": "later",
-      "Version": "1.3.2",
+      "Version": "1.4.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "Rcpp",
         "rlang"
       ],
-      "Hash": "a3e051d405326b8b0012377434c62b37"
+      "Hash": "501744395cac0bab0fbcfab9375ae92c"
     },
     "lattice": {
       "Package": "lattice",
@@ -2205,7 +2205,7 @@
     },
     "mlr3": {
       "Package": "mlr3",
-      "Version": "0.21.1",
+      "Version": "0.22.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -2226,7 +2226,7 @@
         "parallelly",
         "uuid"
       ],
-      "Hash": "09408d75c7e8b0aae2870a82da85e990"
+      "Hash": "4fd3f5cb0454ee68906a78d3fd6590d6"
     },
     "mlr3cluster": {
       "Package": "mlr3cluster",
@@ -2316,7 +2316,7 @@
     },
     "mlr3learners": {
       "Package": "mlr3learners",
-      "Version": "0.8.0",
+      "Version": "0.9.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -2328,7 +2328,7 @@
         "mlr3misc",
         "paradox"
       ],
-      "Hash": "8e2586ee46d007a8059d2697806e98e9"
+      "Hash": "3b192058b4f7008a14770e2fb82ee0ee"
     },
     "mlr3mbo": {
       "Package": "mlr3mbo",
@@ -2365,7 +2365,7 @@
     },
     "mlr3misc": {
       "Package": "mlr3misc",
-      "Version": "0.15.1",
+      "Version": "0.16.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -2377,7 +2377,7 @@
         "digest",
         "methods"
       ],
-      "Hash": "465c3a7a04caf09a431bef1b9c5ec89b"
+      "Hash": "7a55cccc9782bdb9132d880fa4b5970a"
     },
     "mlr3pipelines": {
       "Package": "mlr3pipelines",
@@ -2401,7 +2401,7 @@
     },
     "mlr3tuning": {
       "Package": "mlr3tuning",
-      "Version": "1.2.0",
+      "Version": "1.2.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -2415,11 +2415,11 @@
         "mlr3misc",
         "paradox"
       ],
-      "Hash": "1a2ed2591b7fc48aa3ff257f51cb379b"
+      "Hash": "bf4320b32055d7d0cfe560956fdc9f5d"
     },
     "mlr3tuningspaces": {
       "Package": "mlr3tuningspaces",
-      "Version": "0.5.1",
+      "Version": "0.5.2",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -2432,7 +2432,7 @@
         "mlr3tuning",
         "paradox"
       ],
-      "Hash": "176c9a8d1211810d1417426b94f71cdb"
+      "Hash": "95584d61488c632247de26d027b21b7b"
     },
     "mlr3verse": {
       "Package": "mlr3verse",
@@ -2884,7 +2884,7 @@
     },
     "progressr": {
       "Package": "progressr",
-      "Version": "0.15.0",
+      "Version": "0.15.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -2892,11 +2892,11 @@
         "digest",
         "utils"
       ],
-      "Hash": "b3727a8cfc03525cc44a5f2854d6e025"
+      "Hash": "f8e9876b6ffff900e83f171081cacd6f"
     },
     "promises": {
       "Package": "promises",
-      "Version": "1.3.0",
+      "Version": "1.3.2",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -2908,7 +2908,7 @@
         "rlang",
         "stats"
       ],
-      "Hash": "434cd5388a3979e74be5c219bcd6e77d"
+      "Hash": "c84fd4f75ea1f5434735e08b7f50fbca"
     },
     "prophet": {
       "Package": "prophet",

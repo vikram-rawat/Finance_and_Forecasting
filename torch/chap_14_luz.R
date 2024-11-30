@@ -14,7 +14,6 @@ library(tok)
 library(hfhub)
 
 # start: ----------------------------------
-
 # input dimensionality (number of input features)
 d_in <- 3
 # number of observations in training set
