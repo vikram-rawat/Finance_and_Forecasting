@@ -4,14 +4,11 @@ library("frenchdata") # Fama-French datasets
 library("jrvFinance") # finance functions
 library("BondValuation") # bond valuation tools
 library("FinancialMath") # financial mathematics
-library("quantstrat") # trading strategies
 library("alphavantager") # Alpha Vantage API
 library("irr") # investment/irr calculations
-library("GUIDE") # finance-related package (decision trees)
 
 # ---- Forecasting & Time Series ----
 library("forecast") # forecasting models
-library("fpp") # forecasting textbook datasets
 library("fpp2") # forecasting textbook datasets
 library("fpp3") # forecasting textbook datasets
 library("tsbox") # time series conversion
@@ -36,7 +33,6 @@ library("mall") # AI utilities
 library("torch") # deep learning in R
 library("torchdatasets") # datasets for torch
 library("torchvision") # computer vision with torch
-library("torchaudio") # audio with torch
 library("topicmodels.etm") # embedded topic models
 library("innsight") # interpretability for neural nets
 library("luz") # high-level torch training

@@ -55,9 +55,7 @@ purrr::map(sample_features, purrr::compose(dim, as.array))
 
 # decoder: ----------------------------------
 decoder_block <- nn_module(
-  initialize = function(in_channels,
-                        skip_channels,
-                        out_channels) {
+  initialize = function(in_channels, skip_channels, out_channels) {
     self$upsample <- nn_conv_transpose2d(
       in_channels = in_channels,
       out_channels = out_channels,
@@ -127,8 +125,9 @@ first_decoder_block(
 
 decoder <- nn_module(
   initialize = function(
-      decoder_channels = c(256, 128, 64, 32, 16),
-      encoder_channels = c(16, 24, 32, 96, 320)) {
+    decoder_channels = c(256, 128, 64, 32, 16),
+    encoder_channels = c(16, 24, 32, 96, 320)
+  ) {
     encoder_channels <- rev(encoder_channels)
     skip_channels <- c(encoder_channels[-1], 3)
     in_channels <- c(encoder_channels[1], decoder_channels)
@@ -186,10 +185,7 @@ ds <- oxford_pet_dataset(
 
 pet_dataset <- torch::dataset(
   inherit = oxford_pet_dataset,
-  initialize = function(...,
-                        size,
-                        normalize = TRUE,
-                        augmentation = NULL) {
+  initialize = function(..., size, normalize = TRUE, augmentation = NULL) {
     self$augmentation <- augmentation
     input_transform <- function(x) {
       x <- x %>%
