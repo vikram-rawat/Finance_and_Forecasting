@@ -28,10 +28,20 @@ library("clock") # date-time handling
 
 # ---- Machine Learning ----
 library("mlr3verse") # machine learning framework
+library("modeldata") # datasets for ML models
 
-# ---- Artificial Intelligence ----
+# ---- Artificial Intelligence / Deep Learning ----
 library("ollamar") # AI/LLM integration
 library("mall") # AI utilities
+library("torch") # deep learning in R
+library("torchdatasets") # datasets for torch
+library("torchvision") # computer vision with torch
+library("torchaudio") # audio with torch
+library("topicmodels.etm") # embedded topic models
+library("innsight") # interpretability for neural nets
+library("luz") # high-level torch training
+library("tok") # tokenization utilities
+library("hfhub") # HuggingFace model hub
 
 # ---- Database & Data Access ----
 library("DBI") # database interface
@@ -56,3 +66,6 @@ library("GGally") # ggplot extensions
 library("ggthemes") # extra themes
 library("tidyquant") # ggplot + finance
 library("feasts") # time series visualization
+
+# ---- Spatial / Raster Data ----
+library("raster") # raster data analysis
