@@ -12,7 +12,6 @@ library(fpp2)
 library(fpp3)
 library(tsbox)
 library(alphavantager)
-library(smartapi)
 library(mlr3verse)
 library(quantstrat)
 
@@ -21,9 +20,9 @@ library(quantstrat)
 av_key <- config::get(value = "alphavantage")
 
 # ab_key <- config::get(value = "angelbroking")
-# 
+#
 # ab_obj <- create_connection_object(ab_key)
-# 
+#
 # ab_data <- get_candle_data(
 #   object = ab_obj,
 #   exchange = "NSE",
@@ -69,10 +68,10 @@ eur_usd_today <- av_get(
 
 eur_usd |>
   chartSeries()
-addSMA(n = 20) 
+addSMA(n = 20)
 addBBands(n = 5)
 addRSI(
-  n = 10, 
+  n = 10,
   maType = "EMA"
 )
 addMACD(
@@ -92,7 +91,7 @@ zoomChart(
 
 eur_usd_today |>
   chartSeries()
-addSMA(n = 12) 
+addSMA(n = 12)
 addBBands(n = 12)
 addRSI(n = 14, maType = "EMA")
 addMACD(
@@ -108,4 +107,3 @@ zoomChart(
 )
 
 # create a strategy ---------------
-
