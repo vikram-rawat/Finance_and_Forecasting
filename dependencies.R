@@ -65,3 +65,7 @@ library("feasts") # time series visualization
 
 # ---- Spatial / Raster Data ----
 library("raster") # raster data analysis
+
+# ---- Async Programming ----
+library("mirai") # async programming framework
+library("mori") # Shared data for Async
