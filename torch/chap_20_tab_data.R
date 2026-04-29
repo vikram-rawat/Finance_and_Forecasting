@@ -1,18 +1,5 @@
 # load libraries: ----------------------------------
-
-library(dplyr)
-library(data.table)
-library(modeldata)
-library(torch)
-library(torchdatasets)
-library(torchvision)
-library(torchaudio)
-library(topicmodels.etm)
-library(innsight)
-library(luz)
-library(tok)
-library(hfhub)
-library(ggplot2)
+source("dependencies.R")
 
 # start: ----------------------------------
 
@@ -113,8 +100,7 @@ heart_dataset <- dataset(
       "ca",
       "thal"
     )
-    df[
-      ,
+    df[,
       .SD,
       .SDcols = -leave_col
     ] |>
@@ -131,7 +117,11 @@ heart_dataset <- dataset(
     df$thal <- fifelse(is.na(df$thal), 999, df$thal)
     df |>
       dplyr::select(
-        pain_type, rest_ecg, slope, ca, thal
+        pain_type,
+        rest_ecg,
+        slope,
+        ca,
+        thal
       ) |>
       mutate(
         across(
@@ -217,7 +207,8 @@ embedding_module <- nn_module(
         cardinalities,
         function(x) {
           nn_embedding(
-            num_embeddings = x, embedding_dim = embedding_dim
+            num_embeddings = x,
+            embedding_dim = embedding_dim
           )
         }
       )
@@ -236,11 +227,13 @@ embedding_module <- nn_module(
 )
 
 model <- nn_module(
-  initialize = function(cardinalities,
-                        num_numerical,
-                        embedding_dim,
-                        fc1_dim,
-                        fc2_dim) {
+  initialize = function(
+    cardinalities,
+    num_numerical,
+    embedding_dim,
+    fc1_dim,
+    fc2_dim
+  ) {
     self$embedder <- embedding_module(
       cardinalities,
       embedding_dim
@@ -305,10 +298,12 @@ fitted <- model |>
     cardinalities = cardinalities,
     num_numerical = num_numerical,
     embedding_dim = embedding_dim,
-    fc1_dim = fc1_dim, fc2_dim
+    fc1_dim = fc1_dim,
+    fc2_dim
   ) |>
   set_opt_hparams(lr = 0.001) |>
-  fit(train_dl,
+  fit(
+    train_dl,
     epochs = 200,
     valid_data = valid_dl,
     callbacks = list(
@@ -325,13 +320,9 @@ fitted |>
 embedding_weights <- vector(mode = "list")
 
 for (i in seq_along(fitted$model$embedder$embeddings)) {
-  embedding_weights[[i]] <- fitted$
-    model$
-    embedder$
-    embeddings[[i]]$
-    parameters$
-    weight$
-    to(device = "cpu")
+  embedding_weights[[i]] <- fitted$model$embedder$embeddings[[
+    i
+  ]]$parameters$weight$to(device = "cpu")
 }
 
 slope_weights <- embedding_weights[[3]]

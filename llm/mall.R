@@ -1,7 +1,5 @@
 # load libaries: ----------------------------------
-
-library(ollamar)
-library(mall)
+source("dependencies.R")
 
 # test connection: ----------------------------------
 test_connection()

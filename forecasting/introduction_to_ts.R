@@ -1,13 +1,5 @@
 # load library ------------------------------------------------------------
-
-library(data.table)
-library(timeSeries)
-library(xts)
-library(quantmod)
-library(forecast)
-library(ggplot2)
-library(ggthemes)
-library(FinancialMath)
+source("dependencies.R")
 
 # set defaults ------------------------------------------------------------
 
@@ -15,7 +7,8 @@ setDTthreads(16)
 theme_set(
   theme_solarized(
     light = FALSE,
-    base_size = 14)
+    base_size = 14
+  )
 )
 
 # get Data ----------------------------------------------------------------
@@ -30,16 +23,16 @@ unemp_xts <- as.xts(unemployment)
 
 xts::first(
   x = airp_xts,
-  n =  "1 years"
+  n = "1 years"
 )
 
 xts::last(
   x = airp_xts,
-  n =  "1 years"
+  n = "1 years"
 )
 
-airp_xts |> 
-  convertIndex('POSIXct') |> 
+airp_xts |>
+  convertIndex('POSIXct') |>
   tclass()
 
 methods(class = "xts")
@@ -51,32 +44,34 @@ tail(airp_xts)
 
 frequency(airp_xts)
 summary(airp_xts)
-plot(airp_xts,
-     main = "Air Passenger")
+plot(airp_xts, main = "Air Passenger")
 
 plot(aggregate(AirPassengers))
 
 period.sum(
   x = airp_xts,
-  INDEX =  endpoints(
+  INDEX = endpoints(
     x = airp_xts,
     on = "year"
   )
-) |> plot
+) |>
+  plot
 
-airp_xts |> 
-  as.data.table |> 
+airp_xts |>
+  as.data.table |>
   ggplot(
     aes(index, V1)
-    ) +
+  ) +
   geom_line(color = "white") +
   ylab("air")
 
 chartSeries(airp_xts)
-boxplot( 
-  AirPassengers ~ cycle(AirPassengers))
-boxplot( 
-  coredata(airp_xts) ~ cycle(airp_xts))
+boxplot(
+  AirPassengers ~ cycle(AirPassengers)
+)
+boxplot(
+  coredata(airp_xts) ~ cycle(airp_xts)
+)
 
 frequency(airp_xts)
 
@@ -89,12 +84,13 @@ plot(unemp_xts)
 aggregate(
   head(unemp_xts),
   by = as.yearqtr,
-  FUN = sum) |> 
+  FUN = sum
+) |>
   plot()
 head(unemp_xts)
 
-window(unemp_xts[,"UN"], freq = TRUE)
+window(unemp_xts[, "UN"], freq = TRUE)
 window(unemployment, freq = TRUE)
 
-(unemp_xts[,"UN"] / lag(unemp_xts[,"UN"], 4)) |> 
+(unemp_xts[, "UN"] / lag(unemp_xts[, "UN"], 4)) |>
   plot()

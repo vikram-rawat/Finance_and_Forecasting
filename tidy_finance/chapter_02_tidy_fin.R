@@ -1,17 +1,5 @@
 # load libraries: ----------------------------------
-
-library("tidyverse")
-library("tidyquant")
-library("scales")
-library("data.table")
-library("DBI")
-library("RSQLite")
-library("dplyr")
-library("xts")
-library("ggplot2")
-library("frenchdata")
-library("readxl")
-library("googledrive")
+source("dependencies.R")
 
 # Set defaults: ----------------------------------
 
@@ -112,9 +100,22 @@ macro_predictors <- read_xlsx(
     tms = lty - tbl, # Term spread
     dfy = BAA - AAA # Default yield spread
   ) |>
-  select(month, rp_div, dp, dy, ep, de, svar,
-    bm = `b/m`, ntis, tbl, lty, ltr,
-    tms, dfy, infl
+  select(
+    month,
+    rp_div,
+    dp,
+    dy,
+    ep,
+    de,
+    svar,
+    bm = `b/m`,
+    ntis,
+    tbl,
+    lty,
+    ltr,
+    tms,
+    dfy,
+    infl
   ) |>
   filter(month >= start_date & month <= end_date) |>
   drop_na()
@@ -123,7 +124,8 @@ macro_predictors
 
 # file.remove("macro_predictors.xlsx")
 
-cpi_monthly <- tq_get("CPIAUCNS",
+cpi_monthly <- tq_get(
+  "CPIAUCNS",
   get = "economic.data",
   from = start_date,
   to = end_date
@@ -142,7 +144,8 @@ tidy_finance <- dbConnect(
   extended_types = TRUE
 )
 
-dbWriteTable(tidy_finance,
+dbWriteTable(
+  tidy_finance,
   "factors_ff3_monthly",
   value = factors_ff3_monthly,
   overwrite = TRUE
@@ -157,41 +160,42 @@ factors_ff3_monthly_db |>
   select(month, rf) |>
   collect()
 
-dbWriteTable(tidy_finance,
+dbWriteTable(
+  tidy_finance,
   "factors_ff5_monthly",
   value = factors_ff5_monthly,
   overwrite = TRUE
 )
 
-dbWriteTable(tidy_finance,
+dbWriteTable(
+  tidy_finance,
   "factors_ff3_daily",
   value = factors_ff3_daily,
   overwrite = TRUE
 )
 
-dbWriteTable(tidy_finance,
+dbWriteTable(
+  tidy_finance,
   "industries_ff_monthly",
   value = industries_ff_monthly,
   overwrite = TRUE
 )
 
-dbWriteTable(tidy_finance,
+dbWriteTable(
+  tidy_finance,
   "factors_q_monthly",
   value = factors_q_monthly,
   overwrite = TRUE
 )
 
-dbWriteTable(tidy_finance,
+dbWriteTable(
+  tidy_finance,
   "macro_predictors",
   value = macro_predictors,
   overwrite = TRUE
 )
 
-dbWriteTable(tidy_finance,
-  "cpi_monthly",
-  value = cpi_monthly,
-  overwrite = TRUE
-)
+dbWriteTable(tidy_finance, "cpi_monthly", value = cpi_monthly, overwrite = TRUE)
 
 factors_q_monthly <- tbl(tidy_finance, "factors_q_monthly")
 factors_q_monthly <- factors_q_monthly |> collect()

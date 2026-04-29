@@ -1,17 +1,5 @@
 # load libraries: ----------------------------------
-
-library(dplyr)
-library(data.table)
-library(modeldata)
-library(torch)
-library(torchdatasets)
-library(torchvision)
-library(torchaudio)
-library(topicmodels.etm)
-library(innsight)
-library(luz)
-library(tok)
-library(hfhub)
+source("dependencies.R")
 
 # start: ----------------------------------
 
@@ -60,7 +48,8 @@ train_ds <- mnist_dataset(
     x |>
       torchvision::transform_to_tensor() |>
       transform_random_affine(
-        degrees = c(-45, 45), translate = c(0.1, 0.1)
+        degrees = c(-45, 45),
+        translate = c(0.1, 0.1)
       )
   }
 )
@@ -141,7 +130,8 @@ num_epochs <- 5
 
 # the model has already been setup(), we continue from there
 fitted <- model |>
-  fit(train_dl,
+  fit(
+    train_dl,
     epochs = num_epochs,
     valid_data = valid_dl,
     callbacks = list(
@@ -194,7 +184,8 @@ train_ds <- mnist_dataset(
       torchvision::transform_to_tensor() |>
       expand() |>
       transform_random_affine(
-        degrees = c(-45, 45), translate = c(0.1, 0.1)
+        degrees = c(-45, 45),
+        translate = c(0.1, 0.1)
       )
   }
 )
@@ -208,7 +199,7 @@ train_dl <- dataloader(
 valid_ds <- mnist_dataset(
   dir,
   train = FALSE,
-  transform = \(x){
+  transform = \(x) {
     expand <- function(x) {
       x$expand(c(3, 28, 28))
     }

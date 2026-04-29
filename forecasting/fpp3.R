@@ -1,20 +1,5 @@
 # load libraries ----------------------------------------------------------
-library("dplyr")
-library("ggplot2")
-library("GGally")
-library("data.table")
-library("xts")
-library("clock")
-library("collapse")
-library("broom")
-library("fpp2")
-library("fpp3")
-library("tsibble")
-library("fable")
-library("fabletools")
-library("feasts")
-library("fable.prophet")
-library("fasttime")
+source("dependencies.R")
 
 # set defaults ------------------------------------------------------------
 
@@ -126,8 +111,7 @@ aus_production |>
 aus_xts <- aus_production |>
   as.data.table()
 
-aus_xts[
-  ,
+aus_xts[,
   Quarter := Quarter |>
     as.character() |>
     as.yearqtr(format = "%Y Q%q") |>
@@ -179,12 +163,8 @@ aus_economy <- global_economy |>
 print_retail |>
   left_join(aus_economy, by = "Year") |>
   mutate(Adjusted_turnover = Turnover / CPI * 100) |>
-  pivot_longer(c(Turnover, Adjusted_turnover),
-    values_to = "Turnover"
-  ) |>
-  mutate(name = factor(name,
-    levels = c("Turnover", "Adjusted_turnover")
-  )) |>
+  pivot_longer(c(Turnover, Adjusted_turnover), values_to = "Turnover") |>
+  mutate(name = factor(name, levels = c("Turnover", "Adjusted_turnover"))) |>
   ggplot(aes(x = Year, y = Turnover)) +
   geom_line() +
   facet_grid(name ~ ., scales = "free_y") +
@@ -313,7 +293,6 @@ us_retail_employment |>
   ) |>
   components() |>
   autoplot()
-
 
 
 tourism |>
@@ -946,7 +925,8 @@ fit_beer |>
 fit_beer |>
   augment() |>
   ggplot(aes(
-    x = Beer, y = .fitted,
+    x = Beer,
+    y = .fitted,
     color = as.factor(quarter(Quarter))
   )) +
   geom_point() +
@@ -986,7 +966,8 @@ fit_consBest <- us_change |>
 
 future_scenarios <- scenarios(
   Increase = new_data(
-    us_change, 4
+    us_change,
+    4
   ) |>
     mutate(
       Income = 1,
@@ -994,7 +975,8 @@ future_scenarios <- scenarios(
       Unemployment = 0
     ),
   Decrease = new_data(
-    us_change, 4
+    us_change,
+    4
   ) |>
     mutate(
       Income = -1,
@@ -1258,10 +1240,10 @@ PBS |>
     `Sales ($million)` = Cost,
     `Log sales` = log(Cost),
     `Annual change in log sales` = difference(log(Cost), 12),
-    `Doubly differenced log sales` =
-      difference(
-        difference(log(Cost), 12), 1
-      )
+    `Doubly differenced log sales` = difference(
+      difference(log(Cost), 12),
+      1
+    )
   ) |>
   as.data.table()
 
@@ -1614,16 +1596,18 @@ fit |>
 
 
 bind_rows(
-  `Regression residuals` =
-    as_tibble(residuals(fit, type = "regression")),
-  `ARIMA residuals` =
-    as_tibble(residuals(fit, type = "innovation")),
+  `Regression residuals` = as_tibble(residuals(fit, type = "regression")),
+  `ARIMA residuals` = as_tibble(residuals(fit, type = "innovation")),
   .id = "type"
 ) |>
   mutate(
-    type = factor(type, levels = c(
-      "Regression residuals", "ARIMA residuals"
-    ))
+    type = factor(
+      type,
+      levels = c(
+        "Regression residuals",
+        "ARIMA residuals"
+      )
+    )
   ) |>
   ggplot(aes(x = Quarter, y = .resid)) +
   geom_line() +
@@ -1663,11 +1647,13 @@ vic_elec_daily <- vic_elec |>
     Temperature = max(Temperature),
     Holiday = any(Holiday)
   ) |>
-  mutate(Day_Type = case_when(
-    Holiday ~ "Holiday",
-    wday(Date) %in% 2:6 ~ "Weekday",
-    TRUE ~ "Weekend"
-  ))
+  mutate(
+    Day_Type = case_when(
+      Holiday ~ "Holiday",
+      wday(Date) %in% 2:6 ~ "Weekday",
+      TRUE ~ "Weekend"
+    )
+  )
 
 
 vic_elec_daily |>
@@ -1806,7 +1792,8 @@ fit |>
   guides(colour = "none", fill = "none", level = "none") +
   geom_label(
     aes(
-      x = yearmonth("2007 Jan"), y = 4250,
+      x = yearmonth("2007 Jan"),
+      y = 4250,
       label = paste0("AICc = ", format(AICc))
     ),
     data = glance(fit)
@@ -1829,14 +1816,24 @@ fit <- insurance |>
   # Estimate models
   model(
     lag0 = ARIMA(Quotes ~ pdq(d = 0) + TVadverts),
-    lag1 = ARIMA(Quotes ~ pdq(d = 0) +
-      TVadverts + lag(TVadverts)),
-    lag2 = ARIMA(Quotes ~ pdq(d = 0) +
-      TVadverts + lag(TVadverts) +
-      lag(TVadverts, 2)),
-    lag3 = ARIMA(Quotes ~ pdq(d = 0) +
-      TVadverts + lag(TVadverts) +
-      lag(TVadverts, 2) + lag(TVadverts, 3))
+    lag1 = ARIMA(
+      Quotes ~ pdq(d = 0) +
+        TVadverts +
+        lag(TVadverts)
+    ),
+    lag2 = ARIMA(
+      Quotes ~ pdq(d = 0) +
+        TVadverts +
+        lag(TVadverts) +
+        lag(TVadverts, 2)
+    ),
+    lag3 = ARIMA(
+      Quotes ~ pdq(d = 0) +
+        TVadverts +
+        lag(TVadverts) +
+        lag(TVadverts, 2) +
+        lag(TVadverts, 3)
+    )
   )
 
 fit |>
@@ -1846,7 +1843,8 @@ fit_best <- insurance |>
   model(
     ARIMA(
       Quotes ~ pdq(d = 0) +
-        TVadverts + lag(TVadverts)
+        TVadverts +
+        lag(TVadverts)
     )
   )
 
@@ -1868,15 +1866,18 @@ fit_best |>
 ####################
 
 tourism <- tsibble::tourism |>
-  mutate(State = recode(State,
-    `New South Wales` = "NSW",
-    `Northern Territory` = "NT",
-    `Queensland` = "QLD",
-    `South Australia` = "SA",
-    `Tasmania` = "TAS",
-    `Victoria` = "VIC",
-    `Western Australia` = "WA"
-  ))
+  mutate(
+    State = recode(
+      State,
+      `New South Wales` = "NSW",
+      `Northern Territory` = "NT",
+      `Queensland` = "QLD",
+      `South Australia` = "SA",
+      `Tasmania` = "TAS",
+      `Victoria` = "VIC",
+      `Western Australia` = "WA"
+    )
+  )
 
 tourism_hts <- tourism |>
   aggregate_key(State / Region, Trips = sum(Trips))
@@ -1889,15 +1890,19 @@ tourism_hts |>
   facet_wrap(vars(State))
 
 tourism_hts |>
-  filter(State == "NT" | State == "QLD" |
-    State == "TAS" | State == "VIC", is_aggregated(Region)) |>
+  filter(
+    State == "NT" | State == "QLD" | State == "TAS" | State == "VIC",
+    is_aggregated(Region)
+  ) |>
   select(-Region) |>
   mutate(State = factor(State, levels = c("QLD", "VIC", "NT", "TAS"))) |>
   gg_season(Trips) +
   facet_wrap(vars(State), nrow = 2, scales = "free_y") +
   labs(y = "Trips ('000)")
 
-prison <- readr::read_csv("https://OTexts.com/fpp3/extrafiles/prison_population.csv") |>
+prison <- readr::read_csv(
+  "https://OTexts.com/fpp3/extrafiles/prison_population.csv"
+) |>
   mutate(Quarter = yearquarter(Date)) |>
   select(-Date) |>
   as_tsibble(
@@ -1911,7 +1916,8 @@ prison_gts <- prison |>
 
 prison_gts |>
   filter(
-    !is_aggregated(Gender), is_aggregated(Legal),
+    !is_aggregated(Gender),
+    is_aggregated(Legal),
     is_aggregated(State)
   ) |>
   autoplot(Count) +
@@ -1919,7 +1925,8 @@ prison_gts |>
 
 prison_gts |>
   filter(
-    !is_aggregated(Gender), is_aggregated(Legal),
+    !is_aggregated(Gender),
+    is_aggregated(Legal),
     is_aggregated(State)
   ) |>
   autoplot(Count) +
@@ -1927,22 +1934,23 @@ prison_gts |>
 
 prison_gts |>
   filter(
-    !is_aggregated(Gender), !is_aggregated(Legal),
+    !is_aggregated(Gender),
+    !is_aggregated(Legal),
     !is_aggregated(State)
   ) |>
   mutate(Gender = as.character(Gender)) |>
   ggplot(aes(
-    x = Quarter, y = Count,
-    group = Gender, colour = Gender
+    x = Quarter,
+    y = Count,
+    group = Gender,
+    colour = Gender
   )) +
   stat_summary(fun = sum, geom = "line") +
   labs(
     title = "Prison population by state and gender",
     y = "Number of prisoners ('000)"
   ) +
-  facet_wrap(~ as.character(State),
-    nrow = 1, scales = "free_y"
-  ) +
+  facet_wrap(~ as.character(State), nrow = 1, scales = "free_y") +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 tourism_full <- tourism |>
@@ -2045,7 +2053,9 @@ fc |>
 
 ##########
 
-prison <- readr::read_csv("https://OTexts.com/fpp3/extrafiles/prison_population.csv") |>
+prison <- readr::read_csv(
+  "https://OTexts.com/fpp3/extrafiles/prison_population.csv"
+) |>
   mutate(Quarter = yearquarter(Date)) |>
   select(-Date) |>
   as_tsibble(
@@ -2089,12 +2099,14 @@ fc |>
 fc |>
   filter(
     .model %in% c("base", "MinT"),
-    !is_aggregated(State), is_aggregated(Legal),
+    !is_aggregated(State),
+    is_aggregated(Legal),
     is_aggregated(Gender)
   ) |>
   autoplot(
     prison_gts |> filter(year(Quarter) >= 2010),
-    alpha = 0.7, level = 90
+    alpha = 0.7,
+    level = 90
   ) +
   labs(
     title = "Prison population (by state)",
@@ -2106,7 +2118,8 @@ fc |>
 
 fc |>
   filter(
-    is_aggregated(State), is_aggregated(Gender),
+    is_aggregated(State),
+    is_aggregated(Gender),
     is_aggregated(Legal)
   ) |>
   accuracy(
@@ -2209,9 +2222,12 @@ fc_with_times <- bank_calls |>
 
 fit <- calls |>
   model(
-    dhr = ARIMA(sqrt(Calls) ~ PDQ(0, 0, 0) + pdq(d = 0) +
-      fourier(period = 169, K = 10) +
-      fourier(period = 5 * 169, K = 5))
+    dhr = ARIMA(
+      sqrt(Calls) ~ PDQ(0, 0, 0) +
+        pdq(d = 0) +
+        fourier(period = 169, K = 10) +
+        fourier(period = 5 * 169, K = 5)
+    )
   )
 
 fc <- fit |>
@@ -2269,11 +2285,16 @@ elec |>
 
 fit <- elec |>
   model(
-    ARIMA(Demand ~ PDQ(0, 0, 0) + pdq(d = 0) +
-      Temperature + Cooling + Working_Day +
-      fourier(period = "day", K = 10) +
-      fourier(period = "week", K = 5) +
-      fourier(period = "year", K = 3))
+    ARIMA(
+      Demand ~ PDQ(0, 0, 0) +
+        pdq(d = 0) +
+        Temperature +
+        Cooling +
+        Working_Day +
+        fourier(period = "day", K = 10) +
+        fourier(period = "week", K = 5) +
+        fourier(period = "year", K = 3)
+    )
   )
 
 elec_newdata <- new_data(elec, 2 * 48) |>
@@ -2293,7 +2314,8 @@ fc |>
   autoplot(elec |> tail(10 * 48)) +
   labs(
     title = "Half hourly electricity demand: Victoria",
-    y = "Demand (MWh)", x = "Time [30m]"
+    y = "Demand (MWh)",
+    x = "Time [30m]"
   )
 
 fit |>
@@ -2309,10 +2331,13 @@ fit <- train |>
   model(
     arima = ARIMA(Cement),
     ets = ETS(Cement),
-    prophet = prophet(Cement ~ season(
-      period = 4, order = 2,
-      type = "multiplicative"
-    ))
+    prophet = prophet(
+      Cement ~ season(
+        period = 4,
+        order = 2,
+        type = "multiplicative"
+      )
+    )
   )
 
 fc <- fit |> forecast(h = "2 years 6 months")
@@ -2322,10 +2347,14 @@ fc |> accuracy(cement)
 
 fit <- elec |>
   model(
-    prophet(Demand ~ Temperature + Cooling + Working_Day +
-      season(period = "day", order = 10) +
-      season(period = "week", order = 5) +
-      season(period = "year", order = 3))
+    prophet(
+      Demand ~ Temperature +
+        Cooling +
+        Working_Day +
+        season(period = "day", order = 10) +
+        season(period = "week", order = 5) +
+        season(period = "year", order = 3)
+    )
   )
 
 fit |>
@@ -2411,7 +2440,8 @@ cement_stl |>
 
 cement_stl |>
   generate(
-    new_data = cement, times = 10,
+    new_data = cement,
+    times = 10,
     bootstrap_block_size = 8
   ) |>
   autoplot(.sim) +
@@ -2424,7 +2454,8 @@ cement_stl |>
 
 sim <- cement_stl |>
   generate(
-    new_data = cement, times = 100,
+    new_data = cement,
+    times = 100,
     bootstrap_block_size = 8
   ) |>
   select(-.model, -Cement)
@@ -2522,7 +2553,8 @@ inv_scaled_logit <- function(x, lower = 0, upper = 1) {
 }
 
 my_scaled_logit <- new_transformation(
-  scaled_logit, inv_scaled_logit
+  scaled_logit,
+  inv_scaled_logit
 )
 egg_prices |>
   model(
@@ -2591,8 +2623,10 @@ cafe_futures <- cafe_models |>
   ungroup() |>
   # Create fable object
   as_fable(
-    index = Month, key = .model,
-    distribution = dist, response = "Turnover"
+    index = Month,
+    key = .model,
+    distribution = dist,
+    response = "Turnover"
   )
 
 cafe_futures |>
@@ -2604,10 +2638,7 @@ cafe_futures |>
   )
 
 cafe_futures |>
-  accuracy(auscafe,
-    measures = interval_accuracy_measures,
-    level = 95
-  ) |>
+  accuracy(auscafe, measures = interval_accuracy_measures, level = 95) |>
   arrange(winkler)
 
 
@@ -2719,7 +2750,8 @@ cafe_fit |>
 
 tourism |>
   filter(
-    Region == "Adelaide Hills", Purpose == "Visiting"
+    Region == "Adelaide Hills",
+    Purpose == "Visiting"
   ) |>
   autoplot(Trips) +
   labs(
@@ -2730,7 +2762,8 @@ tourism |>
 
 ah_decomp <- tourism |>
   filter(
-    Region == "Adelaide Hills", Purpose == "Visiting"
+    Region == "Adelaide Hills",
+    Purpose == "Visiting"
   ) |>
   # Fit a non-seasonal STL decomposition
   model(
@@ -2776,7 +2809,8 @@ ah_fill |>
 #> # … with abbreviated variable names ¹​remainder, ²​season_adjust
 ah_fill |>
   autoplot(Trips) +
-  autolayer(ah_fill |> filter_index("2002 Q3" ~ "2003 Q1"),
+  autolayer(
+    ah_fill |> filter_index("2002 Q3" ~ "2003 Q1"),
     Trips,
     colour = "#D55E00"
   ) +

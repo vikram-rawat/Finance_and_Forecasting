@@ -1,15 +1,6 @@
 # load libraries: ----------------------------------
-library(dplyr)
-library(data.table)
-library(modeldata)
-library(torch)
-library(torchvision)
-library(torchaudio)
-library(topicmodels.etm)
-library(innsight)
-library(luz)
-library(tok)
-library(hfhub)
+source("dependencies.R")
+
 # start: ----------------------------------
 
 layer <- nn_linear(in_features = 5, out_features = 16)
@@ -58,7 +49,8 @@ my_linear <- nn_module(
   },
   forward = function(input) {
     self$w |>
-      input$mm() + self$b
+      input$mm() +
+      self$b
   }
 )
 

@@ -1,17 +1,5 @@
 # load libraries: ----------------------------------
-
-library(dplyr)
-library(data.table)
-library(modeldata)
-library(torch)
-library(torchdatasets)
-library(torchvision)
-library(torchaudio)
-library(topicmodels.etm)
-library(innsight)
-library(luz)
-library(tok)
-library(hfhub)
+source("dependencies.R")
 
 # start: ----------------------------------
 # input dimensionality (number of input features)
@@ -100,7 +88,8 @@ fitted <- net |>
     d_out = d_out
   ) |>
   fit(
-    list( # numeric R objects that can be converted into torch tensors
+    list(
+      # numeric R objects that can be converted into torch tensors
       as.matrix(x),
       as.matrix(y)
     ),
@@ -207,20 +196,20 @@ ds <- tensor_dataset(x, y)
 dl <- dataloader(ds, batch_size = 100, shuffle = TRUE)
 
 train_ids <- sample(seq_along(ds), size = 0.6 * length(ds))
-valid_ids <- sample(setdiff(
-  seq_along(ds),
-  train_ids
-), size = 0.2 * length(ds))
+valid_ids <- sample(
+  setdiff(
+    seq_along(ds),
+    train_ids
+  ),
+  size = 0.2 * length(ds)
+)
 test_ids <- setdiff(seq_along(ds), union(train_ids, valid_ids))
 
 train_ds <- dataset_subset(ds, indices = train_ids)
 valid_ds <- dataset_subset(ds, indices = valid_ids)
 test_ds <- dataset_subset(ds, indices = test_ids)
 
-train_dl <- dataloader(train_ds,
-  batch_size = 100,
-  shuffle = TRUE
-)
+train_dl <- dataloader(train_ds, batch_size = 100, shuffle = TRUE)
 valid_dl <- dataloader(valid_ds, batch_size = 100)
 test_dl <- dataloader(test_ds, batch_size = 100)
 
@@ -298,14 +287,17 @@ for (epoch in 1:num_epochs) {
   train_loss <- c()
 
   # use coro::loop() for stability and performance
-  coro::loop(for (b in train_dl) {
-    loss <- train_batch(b)
-    train_loss <- c(train_loss, loss)
-  })
+  coro::loop(
+    for (b in train_dl) {
+      loss <- train_batch(b)
+      train_loss <- c(train_loss, loss)
+    }
+  )
 
   cat(sprintf(
     "\nEpoch %d, training: loss: %3.5f \n",
-    epoch, mean(train_loss)
+    epoch,
+    mean(train_loss)
   ))
 
   model$eval()
@@ -313,14 +305,17 @@ for (epoch in 1:num_epochs) {
 
   # disable gradient tracking to reduce memory usage
   with_no_grad({
-    coro::loop(for (b in valid_dl) {
-      loss <- valid_batch(b)
-      valid_loss <- c(valid_loss, loss)
-    })
+    coro::loop(
+      for (b in valid_dl) {
+        loss <- valid_batch(b)
+        valid_loss <- c(valid_loss, loss)
+      }
+    )
   })
 
   cat(sprintf(
     "\nEpoch %d, validation: loss: %3.5f \n",
-    epoch, mean(valid_loss)
+    epoch,
+    mean(valid_loss)
   ))
 }

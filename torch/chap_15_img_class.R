@@ -1,17 +1,5 @@
 # load libraries: ----------------------------------
-
-library(dplyr)
-library(data.table)
-library(modeldata)
-library(torch)
-library(torchdatasets)
-library(torchvision)
-library(torchaudio)
-library(topicmodels.etm)
-library(innsight)
-library(luz)
-library(tok)
-library(hfhub)
+source("dependencies.R")
 
 # start: ----------------------------------
 
@@ -135,10 +123,7 @@ valid_ds <- tiny_imagenet_dataset(
   }
 )
 
-train_dl <- dataloader(train_ds,
-  batch_size = 128,
-  shuffle = TRUE
-)
+train_dl <- dataloader(train_ds, batch_size = 128, shuffle = TRUE)
 
 valid_dl <- dataloader(valid_ds, batch_size = 128)
 

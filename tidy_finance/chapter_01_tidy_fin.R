@@ -1,17 +1,5 @@
 # load libraries: ----------------------------------
-
-library("tidyverse")
-library("tidyquant")
-library("scales")
-library("data.table")
-library("DBI")
-library("RSQLite")
-library("dplyr")
-library("xts")
-library("ggplot2")
-library("frenchdata")
-library("readxl")
-library("googledrive")
+source("dependencies.R")
 
 # Set defaults: ----------------------------------
 
@@ -48,9 +36,7 @@ quantile_05 <- quantile(returns$ret, probs = 0.5)
 returns |>
   ggplot(aes(x = ret)) +
   geom_histogram(bins = 100) +
-  geom_vline(aes(xintercept = quantile_05),
-    linetype = "dashed"
-  ) +
+  geom_vline(aes(xintercept = quantile_05), linetype = "dashed") +
   labs(
     x = NULL,
     y = NULL,
@@ -146,7 +132,8 @@ trading_volume |>
   ) +
   geom_line() +
   labs(
-    x = NULL, y = NULL,
+    x = NULL,
+    y = NULL,
     title = "Aggregate daily trading volume of DOW index constitutens"
   ) +
   scale_y_continuous(
@@ -156,9 +143,7 @@ trading_volume |>
 trading_volume |>
   ggplot(aes(x = lag(trading_volume), y = trading_volume)) +
   geom_point() +
-  geom_abline(aes(intercept = 0, slope = 1),
-    linetype = "dashed"
-  ) +
+  geom_abline(aes(intercept = 0, slope = 1), linetype = "dashed") +
   labs(
     x = "Previous day aggregate trading volume",
     y = "Aggregate trading volume",
@@ -236,7 +221,8 @@ res |>
       mu = length_year * mu,
       sd = sqrt(length_year) * sqrt(diag(sigma))
     ),
-    aes(y = mu, x = sd), size = 1
+    aes(y = mu, x = sd),
+    size = 1
   ) +
   labs(
     x = "Annualized standard deviation",
@@ -245,4 +231,3 @@ res |>
   ) +
   scale_x_continuous(labels = percent) +
   scale_y_continuous(labels = percent)
-

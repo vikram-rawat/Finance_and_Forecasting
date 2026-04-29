@@ -1,17 +1,5 @@
 # load libraries: ----------------------------------
-
-library(dplyr)
-library(data.table)
-library(modeldata)
-library(torch)
-library(torchdatasets)
-library(torchvision)
-library(torchaudio)
-library(topicmodels.etm)
-library(innsight)
-library(luz)
-library(tok)
-library(hfhub)
+source("dependencies.R")
 
 # start: ----------------------------------
 
@@ -27,7 +15,8 @@ train_ds <- tiny_imagenet_dataset(
     x |>
       torchvision::transform_to_tensor() |>
       transform_random_affine(
-        degrees = c(-30, 30), translate = c(0.2, 0.2)
+        degrees = c(-30, 30),
+        translate = c(0.2, 0.2)
       ) |>
       transform_normalize(
         mean = c(0.485, 0.456, 0.406),
@@ -196,8 +185,10 @@ rates_and_losses |>
   plot()
 
 fitted <- model |>
-  fit(train_dl,
-    epochs = 50, valid_data = valid_dl,
+  fit(
+    train_dl,
+    epochs = 50,
+    valid_data = valid_dl,
     callbacks = list(
       luz_callback_early_stopping(patience = 2),
       luz_callback_lr_scheduler(
@@ -249,8 +240,10 @@ rates_and_losses |>
   plot()
 
 fitted <- model |>
-  fit(train_dl,
-    epochs = 50, valid_data = valid_dl,
+  fit(
+    train_dl,
+    epochs = 50,
+    valid_data = valid_dl,
     callbacks = list(
       luz_callback_early_stopping(patience = 2),
       luz_callback_lr_scheduler(

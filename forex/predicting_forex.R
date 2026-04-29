@@ -1,19 +1,5 @@
 # load library ------------------------------------------------------------
-
-library(data.table)
-library(timeSeries)
-library(xts)
-library(quantmod)
-library(forecast)
-library(ggplot2)
-library(FinancialMath)
-library(fpp)
-library(fpp2)
-library(fpp3)
-library(tsbox)
-library(alphavantager)
-library(mlr3verse)
-library(quantstrat)
+source("dependencies.R")
 
 # set defaults ------------------------------------------------------------
 

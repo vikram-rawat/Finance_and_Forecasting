@@ -1,17 +1,5 @@
 # load libraries: ----------------------------------
-
-library(dplyr)
-library(data.table)
-library(modeldata)
-library(torch)
-library(torchdatasets)
-library(torchvision)
-library(torchaudio)
-library(topicmodels.etm)
-library(innsight)
-library(luz)
-library(tok)
-library(hfhub)
+source("dependencies.R")
 
 # start: ----------------------------------
 
@@ -43,13 +31,14 @@ rosenbrock(5:6)
 #   x$sub_(lr * x$grad)
 # }
 
-
 num_iterations <- 1e4
 lr <- 0.01
 x <- torch_tensor(c(-1, 1), requires_grad = TRUE)
 
 for (i in 1:num_iterations) {
-  if (i %% 100 == 0) cat("Iteration: ", i, "\n")
+  if (i %% 100 == 0) {
+    cat("Iteration: ", i, "\n")
+  }
 
   value <- rosenbrock(x)
   if (i %% 100 == 0) {

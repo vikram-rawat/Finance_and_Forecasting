@@ -1,17 +1,5 @@
 # load libraries: ----------------------------------
-
-library(dplyr)
-library(data.table)
-library(modeldata)
-library(torch)
-library(torchdatasets)
-library(torchvision)
-library(torchaudio)
-library(topicmodels.etm)
-library(innsight)
-library(luz)
-library(tok)
-library(hfhub)
+source("dependencies.R")
 
 # start: ----------------------------------
 
@@ -29,7 +17,8 @@ valid_dl <- dataloader(valid_ds, batch_size = 128)
 # a convenient way to obtain individual images without
 # manual iteration
 test_images <- coro::collect(
-  valid_dl, 1
+  valid_dl,
+  1
 )[[1]]$x[1:32, 1, , ] |>
   as.array()
 
@@ -39,9 +28,11 @@ par(mfrow = c(4, 8), mar = rep(0, 4), mai = rep(0, 4))
 test_images |>
   purrr::array_tree(1) |>
   purrr::map(as.raster) |>
-  purrr::iwalk(~ {
-    plot(.x)
-  })
+  purrr::iwalk(
+    ~ {
+      plot(.x)
+    }
+  )
 
 # transform or augment images: ----------------------------------
 train_ds <- mnist_dataset(
@@ -72,7 +63,8 @@ train_dl <- dataloader(
 )
 
 train_images <- coro::collect(
-  train_dl, 1
+  train_dl,
+  1
 )[[1]]$x[1:32, 1, , ] |>
   as.array()
 
@@ -80,9 +72,11 @@ par(mfrow = c(4, 8), mar = rep(0, 4), mai = rep(0, 4))
 train_images |>
   purrr::array_tree(1) |>
   purrr::map(as.raster) |>
-  purrr::iwalk(~ {
-    plot(.x)
-  })
+  purrr::iwalk(
+    ~ {
+      plot(.x)
+    }
+  )
 
 # tensor_image_display(train_ds[1]$x)
 # tensor_image_display(train_images)
@@ -97,15 +91,13 @@ train_ds <- mnist_dataset(
     x |>
       torchvision::transform_to_tensor() |>
       torchvision::transform_random_affine(
-        degrees = c(-45, 45), translate = c(0.1, 0.1)
+        degrees = c(-45, 45),
+        translate = c(0.1, 0.1)
       )
   }
 )
 
-train_dl <- dataloader(train_ds,
-  batch_size = 128,
-  shuffle = TRUE
-)
+train_dl <- dataloader(train_ds, batch_size = 128, shuffle = TRUE)
 
 convnet <- nn_module(
   "convnet",
@@ -181,10 +173,7 @@ train_ds <- mnist_dataset(
   transform = transform_to_tensor
 )
 
-train_dl <- dataloader(train_ds,
-  batch_size = 128,
-  shuffle = TRUE
-)
+train_dl <- dataloader(train_ds, batch_size = 128, shuffle = TRUE)
 
 fitted <- convnet |>
   setup(
@@ -255,7 +244,8 @@ fitted <- convnet |>
     optimizer = optim_adam,
     metrics = list(luz_metric_accuracy())
   ) |>
-  fit(train_dl,
+  fit(
+    train_dl,
     epochs = 5,
     valid_data = valid_dl,
     callbacks = list(

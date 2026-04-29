@@ -1,6 +1,3 @@
 # library: ----------------------------------
-
-library("mirai")
-library("mori")
-
+source("dependencies.R")
 # section: ----------------------------------

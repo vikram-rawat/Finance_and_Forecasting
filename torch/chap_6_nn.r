@@ -1,17 +1,5 @@
 # load libraries: ----------------------------------
-
-library(dplyr)
-library(data.table)
-library(modeldata)
-library(torch)
-library(torchdatasets)
-library(torchvision)
-library(torchaudio)
-library(topicmodels.etm)
-library(innsight)
-library(luz)
-library(tok)
-library(hfhub)
+source("dependencies.R")
 
 # start: ----------------------------------
 
@@ -90,12 +78,7 @@ learning_rate <- 1e-4
 
 for (t in 1:1e3) {
   ### -------- Forward pass --------
-  y_pred <- x$
-    mm(w1)$
-    add(b1)$
-    relu()$
-    mm(w2)$
-    add(b2)
+  y_pred <- x$mm(w1)$add(b1)$relu()$mm(w2)$add(b2)
 
   ### -------- Compute loss --------
   loss <- (y_pred - y)$pow(2)$mean()
